@@ -39,7 +39,7 @@ y = fruits['fruit_label']
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
 scaler = MinMaxScaler() #scale data to 0~1
-X_train = scaler.fit_transform(X_train)
+X_train = scaler.fit_transform(X_train) # use fit_transform is effective, and portable
 X_test = scaler.transform(X_test) #scaler.transform uses the fit_transform pattern, means it might larger than 1
 
 ### logistic regression ###
@@ -63,7 +63,10 @@ print(f'Accuracy of knn test set {knn.score(X_test, y_test)}')
 ### plot ### 
 def plot_fruit_knn(X, y, n_neighbors, weights):
     X_mat = X[['height','width']].values
+    #X_mat = X[['mass','color_score']].values
     y_mat = y.values
+
+    #X_mat = scaler.fit_transform(X_mat)
 
     cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF','#AFAFAF'])
     cmap_bold  = ListedColormap(['#FF0000', '#00FF00', '#0000FF','#AFAFAF'])
